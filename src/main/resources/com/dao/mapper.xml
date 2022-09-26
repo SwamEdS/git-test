@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Dao.TestFind">
+
+    <resultMap id="DeptMap" type="dept" >
+        <id property="deptno" column="deptno"/>
+        <result property="dname" column="dname"></result>
+        <result property="loc" column="loc"></result>
+
+        <collection property="empList" ofType="emp" >
+            <id property="empno" column="empno"/>
+            <result property="ename" column="ename"/>
+            <result property="mgr" column="mgr"/>
+            <result property="hiredate" column="hiredate"/>
+            <result property="sal" column="sal"/>
+            <result property="comm" column="comm"/>
+            <result property="deptno" column="deptno"/>
+        </collection>
+    </resultMap>
+
+    <select  id="findByDeptno" resultMap="DeptMap" parameterType="Integer">
+       SELECT * FROM dept AS d INNER JOIN emp AS e  WHERE d.deptno=20
+    </select>
+</mapper>
